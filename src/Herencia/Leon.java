@@ -1,0 +1,26 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Herencia;
+
+/**
+ *
+ * @author T-107
+ */
+// la primera vez que se implementa la interfaz marca errpr leon, se pasa el metodo abstracto, pero a su vez puede ser una
+// clase abstracta 
+// clase abstracta: implementar solo una vez 
+// interfaz: se puede implementar mas de una vez
+// se pone el implements abstract
+// @Override: Notacion sobre escritura de la interface
+public class Leon extends Animal implements ComportamientoRuido {
+
+    @Override
+    public String haceRuido() {
+       return "warrrrrr!!!!";
+    }
+    
+    
+}
