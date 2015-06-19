@@ -14,7 +14,7 @@ public class MenordeEdadException extends Exception{
     public MenordeEdadException(){
         // super dentro un constructor se pone inmediatamente en la instruccion y dentro se pone el argumento que tiene 
         // el papa es el mnsj string 
-        super("Eres un chamaco pervertido, le dire a tu mama!!, no te puedo registrar" + "Registrar" );
+        super("Eres un chamaco pervertido, le dire a tu mama!!, no te puedo " + "Registrar" );
         
         
         
