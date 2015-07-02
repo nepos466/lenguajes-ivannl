@@ -9,7 +9,7 @@ package EjercicioTipoExa;
  *
  * @author T-107
  */
-public class Usuario  {
+    public class Usuario  {
     private String nombre;
     private int edad;
     private String email;
@@ -26,9 +26,7 @@ public class Usuario  {
         this.edad = edad;
         this.email= email;
         this.direccion = direccion;
-    }
-    
-    
+    }   
 
     public String getNombre() {
         return nombre;
@@ -53,7 +51,6 @@ public class Usuario  {
     public void setEmail(String email) {
         this.email = email;
     }
-    
    
 
     public void setDireccion(Direccion direccion) {

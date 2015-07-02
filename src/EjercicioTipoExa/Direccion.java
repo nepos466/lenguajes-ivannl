@@ -13,11 +13,11 @@ public class Direccion {
     private int cp;
     private String municipio;
     
-    
+    //constructor que inicializa los atributos
     public Direccion(int cp) {
     this.cp=cp;
     }
-    
+    //constructor que inicializa los atributos
     public Direccion(int cp, String municipio){
     this.cp=cp;
     this.municipio=municipio;
