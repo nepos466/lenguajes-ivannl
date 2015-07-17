@@ -5,6 +5,10 @@ Tips: para la interfaz grafica
  */
 package colletions;
 
+import java.util.Collections;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author T-107
@@ -60,20 +64,19 @@ public class InterfazUsuarios extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(65, 65, 65)
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(66, 66, 66)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(178, 178, 178)
-                            .addComponent(jLabel2))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(TextoEmail, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
-                                .addComponent(textotNombre, javax.swing.GroupLayout.Alignment.LEADING))
-                            .addGap(57, 57, 57)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(textoEdad)
-                                .addComponent(BotonGuardar, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(66, 66, 66)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(178, 178, 178)
+                        .addComponent(jLabel2))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(TextoEmail, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
+                            .addComponent(textotNombre, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addGap(57, 57, 57)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(textoEdad)
+                            .addComponent(BotonGuardar, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE))))
                 .addContainerGap(266, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -99,12 +102,14 @@ public class InterfazUsuarios extends javax.swing.JFrame {
         jTabbedPane1.addTab("Agregar usuarios", jPanel1);
 
         botonCargarUsuarios.setText("Cargar Usuarios");
+        botonCargarUsuarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonCargarUsuariosActionPerformed(evt);
+            }
+        });
 
         TablaUsuarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
                 {null, null, null}
             },
             new String [] {
@@ -151,6 +156,30 @@ public class InterfazUsuarios extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void botonCargarUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCargarUsuariosActionPerformed
+       //objeto generador de usuarios
+        // el ordenamiento se hace antes de que se cree el objeto del arrayList
+        GeneradorDeUsuario gen=new GeneradorDeUsuario();
+        // estos usuarios se sustituyen en el getusuarios
+        List<Usuario> usuarios= gen.getUsuarios();
+        
+        Collections.sort(usuarios,new UsuarioPorNombre());
+        //size es el nuero de tus filas por ello ya no marca error, si no se hace esto marca error porque se 
+        // esta invocando un arrayList, esto se llama chaining encadenamiento por metodos.
+        TablaUsuarios.setModel(new DefaultTableModel(new String[]{"nombre","Edad","Email"},gen.getUsuarios().size()));
+        int fila=0;
+        //for(Usuario u:gen.getUsuarios()){
+        for(Usuario u:usuarios){
+        TablaUsuarios.setValueAt(u.getNombre(), fila, 0);
+        TablaUsuarios.setValueAt(u.getEdad(), fila, 1);
+        TablaUsuarios.setValueAt(u.getEmail(), fila, 2);       
+        fila++;
+        }
+        
+        
+        
+    }//GEN-LAST:event_botonCargarUsuariosActionPerformed
 
     /**
      * @param args the command line arguments
