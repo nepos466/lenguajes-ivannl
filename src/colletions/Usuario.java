@@ -11,10 +11,10 @@ package colletions;
  */
 public class Usuario {
     private String Nombre;
-    private int edad;
+    private Integer edad;
     private String email;
 
-    public Usuario(String Nombre, int edad, String email) {
+    public Usuario(String Nombre, Integer edad, String email) {
         this.Nombre = Nombre;
         this.edad = edad;
         this.email = email;
@@ -28,11 +28,11 @@ public class Usuario {
         this.Nombre = Nombre;
     }
 
-    public int getEdad() {
+    public Integer getEdad() {
         return edad;
     }
 
-    public void setEdad(int edad) {
+    public void setEdad(Integer edad) {
         this.edad = edad;
     }
 

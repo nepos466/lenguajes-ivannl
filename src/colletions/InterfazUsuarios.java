@@ -20,6 +20,8 @@ public class InterfazUsuarios extends javax.swing.JFrame {
      */
     public InterfazUsuarios() {
         initComponents();
+        //esto des habilita el boton.
+        botonCargarUsuarios.setEnabled(false);
     }
 
     /**
@@ -44,6 +46,7 @@ public class InterfazUsuarios extends javax.swing.JFrame {
         botonCargarUsuarios = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         TablaUsuarios = new javax.swing.JTable();
+        ComboSeleccion = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -118,27 +121,37 @@ public class InterfazUsuarios extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(TablaUsuarios);
 
+        ComboSeleccion.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ordenar por nombre", "Ordenar por edad" }));
+        ComboSeleccion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ComboSeleccionActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(232, 232, 232)
-                .addComponent(botonCargarUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(105, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(botonCargarUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(ComboSeleccion, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(87, 87, 87))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(botonCargarUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(botonCargarUsuarios, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                    .addComponent(ComboSeleccion))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(72, Short.MAX_VALUE))
+                .addGap(72, 72, 72))
         );
 
         jTabbedPane1.addTab("Mostrar Usuarios", jPanel2);
@@ -163,8 +176,8 @@ public class InterfazUsuarios extends javax.swing.JFrame {
         GeneradorDeUsuario gen=new GeneradorDeUsuario();
         // estos usuarios se sustituyen en el getusuarios
         List<Usuario> usuarios= gen.getUsuarios();
-        
-        Collections.sort(usuarios,new UsuarioPorNombre());
+        // Collections.sort(usuarios,new UsuarioPorNombre()); ahora lo cambiaremos por usuario por edad
+        Collections.sort(usuarios,new UsuarioPorEdad());
         //size es el nuero de tus filas por ello ya no marca error, si no se hace esto marca error porque se 
         // esta invocando un arrayList, esto se llama chaining encadenamiento por metodos.
         TablaUsuarios.setModel(new DefaultTableModel(new String[]{"nombre","Edad","Email"},gen.getUsuarios().size()));
@@ -180,6 +193,13 @@ public class InterfazUsuarios extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_botonCargarUsuariosActionPerformed
+
+    private void ComboSeleccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboSeleccionActionPerformed
+      botonCargarUsuarios.setEnabled(true);
+      int indice=ComboSeleccion.getSelectedIndex();
+      
+       
+    }//GEN-LAST:event_ComboSeleccionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -218,6 +238,7 @@ public class InterfazUsuarios extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BotonGuardar;
+    private javax.swing.JComboBox ComboSeleccion;
     private javax.swing.JTable TablaUsuarios;
     private javax.swing.JTextField TextoEmail;
     private javax.swing.JButton botonCargarUsuarios;
